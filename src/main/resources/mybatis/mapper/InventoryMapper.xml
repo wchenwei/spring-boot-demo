@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.finance.archives.mapper.IInventoryMapper">
+    <resultMap id="BashResultMap" type="com.finance.archives.po.Inventory">
+        <result column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="shortName" property="shortName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id , code, name, shortName
+    </sql>
+
+    <select id="getAll" resultMap="BashResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM acct_userdefined06
+    </select>
+
+    <select id="getById" resultMap="BashResultMap" parameterType="String">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM acct_userdefined06
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.finance.archives.po.Inventory">
+        INSERT INTO acct_userdefined06(
+            <include refid="Base_Column_List"/>
+        )
+        VALUES(
+        #{id,jdbcType=VARCHAR},
+        #{code,jdbcType=VARCHAR},
+        #{name,jdbcType=VARCHAR},
+        #{shortName,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.finance.archives.po.Inventory">
+        UPDATE acct_userdefined06
+        SET
+        id =#{id,jdbcType=VARCHAR},
+        code =#{code,jdbcType=VARCHAR},
+        name =#{name,jdbcType=VARCHAR},
+        shortName =#{shortName,jdbcType=VARCHAR}
+        where id =#{id}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        DELETE acct_userdefined06
+        where id =#{id}
+    </delete>
+
+</mapper>

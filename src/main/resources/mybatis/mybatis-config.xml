@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="java.lang.Integer" alias="Integer"/>
+        <typeAlias type="java.lang.Long" alias="Long"/>
+        <typeAlias type="java.lang.String" alias="String"/>
+        <typeAlias type="java.util.ArrayList" alias="ArrayList"/>
+        <typeAlias type="java.util.HashSet" alias="HashSet"/>
+        <typeAlias type="java.util.HashMap" alias="HashMap"/>
+    </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.finance.plugin.MyPlugin">
+            <property name="key1" value="value1"/>
+            <property name="key2" value="value2"/>
+            <property name="key3" value="value3"/>
+        </plugin>
+    </plugins>
+</configuration>
