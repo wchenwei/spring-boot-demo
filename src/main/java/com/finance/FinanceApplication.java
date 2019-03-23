@@ -2,11 +2,15 @@ package com.finance;
 
 import com.finance.aspect.MyAspect;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 @MapperScan("com.finance.archives.mapper")
@@ -25,5 +29,12 @@ public class FinanceApplication {
         return new MyAspect();
     }
 
+    @Autowired
+    private PlatformTransactionManager transactionManager = null;
+
+    @PostConstruct
+    public void  viewTransactionManager(){
+        System.out.println(transactionManager.getClass().getName());
+    }
 
 }
