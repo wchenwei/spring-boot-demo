@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -31,7 +32,16 @@ public class FinanceApplicationTests {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @Test
+    public void testRedisTemplate(){
+        redisTemplate.opsForValue().set("key1","value1");
+        redisTemplate.opsForHash().put("hash","field","hvalue");
+    }
+
+   /* @Test
     public void insertUser(){
 //        User user = new User();
 //        user.setUsername("大标");
@@ -45,7 +55,7 @@ public class FinanceApplicationTests {
         List<User> users = userService.findUsers("大标", "老二");
         System.out.println(users.toString());
     }
-
+*/
 //    @Test
 ////    public void testQuery(){
 ////        List<Inventory> inventoryList = inventoryService.getAll();
