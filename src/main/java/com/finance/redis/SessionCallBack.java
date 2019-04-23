@@ -11,6 +11,7 @@ public class SessionCallBack {
         redisTemplate.execute(new SessionCallback() {
             @Override
             public Object execute(RedisOperations redisOperations) throws DataAccessException {
+                redisOperations.opsForValue().set("key1","key1");
                 return null;
             }
         });

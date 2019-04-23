@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +21,9 @@ import javax.annotation.PostConstruct;
 @EnableJpaRepositories(basePackages = {"com.finance.archives.dao"})
 @PropertySource(value = "classpath:jdbc.properties",ignoreResourceNotFound = true)
 public class FinanceApplication {
+
+    @Autowired
+    private RedisTemplate redisTemplate = null;
 
     public static void main(String[] args) {
         SpringApplication.run(FinanceApplication.class, args);
@@ -37,4 +42,14 @@ public class FinanceApplication {
         System.out.println(transactionManager.getClass().getName());
     }
 
+    @PostConstruct
+    public void init(){
+        initRedisTemplate();
+    }
+
+    private void initRedisTemplate(){
+        RedisSerializer stringSerializer = redisTemplate.getStringSerializer();
+        redisTemplate.setKeySerializer(stringSerializer);
+        redisTemplate.setHashKeySerializer(stringSerializer);
+    }
 }
