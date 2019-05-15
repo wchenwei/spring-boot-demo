@@ -8,6 +8,8 @@ import com.finance.archives.service.IInventoryService;
 import com.finance.archives.service.IUserService;
 import com.finance.interceptor.MyInterceptor;
 import com.finance.interceptor.ProxyBean;
+import com.finance.util.ApplicationContextUtil;
+import com.finance.util.PropertiesUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.aop.framework.ProxyFactoryBean;
@@ -35,11 +37,18 @@ public class FinanceApplicationTests {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private PropertiesUtil propertiesUtil;
     @Test
-    public void testRedisTemplate(){
-        redisTemplate.opsForValue().set("key1","value1");
-        redisTemplate.opsForHash().put("hash","field","hvalue");
+    public void testProperties() {
+        String properties = propertiesUtil.getPro("/");
     }
+
+//    @Test
+//    public void testRedisTemplate(){
+//        redisTemplate.opsForValue().set("key1","value1");
+//        redisTemplate.opsForHash().put("hash","field","hvalue");
+//    }
 
    /* @Test
     public void insertUser(){

@@ -16,10 +16,10 @@ import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 @MapperScan("com.finance.archives.mapper")
-@ComponentScan("com.finance")
 @EntityScan("com.finance.archives.po")
 @EnableJpaRepositories(basePackages = {"com.finance.archives.dao"})
 @PropertySource(value = "classpath:jdbc.properties",ignoreResourceNotFound = true)
+@ComponentScan("com.finance")
 public class FinanceApplication {
 
     @Autowired
@@ -53,3 +53,5 @@ public class FinanceApplication {
         redisTemplate.setHashKeySerializer(stringSerializer);
     }
 }
+
+

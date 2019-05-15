@@ -55,7 +55,6 @@ public class DataBaseProperties {
         return password;
     }
 
-    @Value("${spring.datasource.password}")
     public void setPassword(String password) {
         System.out.println(password);
         this.password = password;
